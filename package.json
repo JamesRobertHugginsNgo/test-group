@@ -2,15 +2,19 @@
   "name": "test-group",
   "version": "1.0.1",
   "description": "",
-  "main": "test-group.js",
+  "main": "dist/test-group.js",
+  "module": "test-group.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.config.js --mode production",
+    "test": "node test-group.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.51.0"
+    "eslint": "^8.51.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   }
 }

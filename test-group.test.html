@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script src="dist/test-group.js"></script>
+	<script>
+		const { testGroup, test } = TestGroup;
+
+		testGroup('Group Description', () => {
+			test('Pass Test Description', () => {
+				return true;
+			})
+
+			test('Failed Test Description', () => {
+				return false;
+			})
+
+			testGroup('Sub Group Description', () => {
+				test('Pass Test Description', () => {
+					return true;
+				})
+
+				test('Failed Test Description', () => {
+					return false;
+				})
+			});
+		});
+	</script>
+</body>
+
+</html>
