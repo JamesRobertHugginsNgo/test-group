@@ -5,7 +5,6 @@ export default {
 	output: {
 		path: Path.resolve('dist'),
 		filename: 'test-group.js',
-		globalObject: 'this',
 		library: 'TestGroup'
 	}
 };
