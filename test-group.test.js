@@ -1,21 +1,59 @@
-import { testGroup, test } from "./test-group.js";
+/* global console setTimeout */
 
-testGroup('Group Description', () => {
-	test('Pass Test Description', () => {
+import { testGroup, test } from './test-group.js';
+
+testGroup('Group Description A', function () {
+	console.log('Code execution...');
+
+	test('Pass Test Description', function () {
 		return true;
 	});
 
-	test('Failed Test Description', () => {
+	test('Failed Test Description', function () {
 		return false;
 	});
 
-	testGroup('Sub Group Description', () => {
-		test('Pass Test Description', () => {
+	testGroup('Sub Group Description', function () {
+		console.log('Code execution...');
+
+		test('Pass Test Description', function () {
 			return true;
 		});
 
-		test('Failed Test Description', () => {
+		test('Failed Test Description', function () {
 			return false;
+		});
+	});
+});
+
+testGroup('Group Description B', function () {
+	console.log('Code execution...');
+
+	return test('Pass Test Description', function () {
+		return Promise.resolve(true);
+	}).then(() => {
+		return test('Failed Test Description', function () {
+			return Promise.resolve(false);
+		});
+	}).then(() => {
+		return testGroup('Sub Group Description', function () {
+			console.log('Code execution...');
+
+			return test('Pass Test Description', function () {
+				return new Promise((resolve) => {
+					setTimeout(function() {
+						resolve(true);
+					}, 500);
+				});
+			}).then(() => {
+				return test('Failed Test Description', function () {
+					return new Promise((resolve) => {
+						setTimeout(function() {
+							resolve(false);
+						}, 500);
+					});
+				});
+			});
 		});
 	});
 });
