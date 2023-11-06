@@ -2,9 +2,7 @@
   "name": "test-group",
   "version": "1.0.1",
   "description": "",
-  "main": "./dist/test-group.js",
-  "exports": "./test-group.js",
-  "module": "./test-group.js",
+  "main": "./test-group.js",
   "type": "module",
   "scripts": {
     "build": "webpack --config webpack.config.js --mode production",
