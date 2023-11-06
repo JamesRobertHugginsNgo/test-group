@@ -1,5 +1,11 @@
 /* global console */
 
+/**
+ * Groups code execution and testing.
+ * @param {string} description
+ * @param {function} func
+ * @returns {undefined|Promise}
+ */
 export function testGroup(description, func) {
 	console.group(description);
 
@@ -11,6 +17,10 @@ export function testGroup(description, func) {
 	console.groupEnd();
 }
 
+/**
+ * Displays test result.
+ * @param {boolean} result
+ */
 function testEnd(result) {
 	console.log(
 		typeof result !== 'boolean'
@@ -21,6 +31,12 @@ function testEnd(result) {
 	);
 }
 
+/**
+ * Logs test description and result.
+ * @param {string} description
+ * @param {function} func
+ * @returns {undefined|Promise}
+ */
 export function test(description, func) {
 	return testGroup(description, () => {
 		const result = func();
