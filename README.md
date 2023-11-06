@@ -5,7 +5,7 @@ A set of functions for organizing test codes.
 ## Installation
 
 ```
-npm install git+https://github.com/JamesRobertHugginsNgo/test-group.git
+npm install git+https://github.com/JamesRobertHugginsNgo/test-group.git#1.2.0
 ```
 
 ## Usage
