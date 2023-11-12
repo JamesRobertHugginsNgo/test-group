@@ -1,6 +1,6 @@
 /* global console setTimeout */
 
-import { testGroup, test } from './test-group.js';
+import { testGroup, test } from '../test-group.js';
 
 testGroup('Group Description A', function () {
 	console.log('Code execution...');
@@ -13,6 +13,10 @@ testGroup('Group Description A', function () {
 		return false;
 	});
 
+	test('Other Test Description', function () {
+		return 'any';
+	});
+
 	testGroup('Sub Group Description', function () {
 		console.log('Code execution...');
 
@@ -23,6 +27,10 @@ testGroup('Group Description A', function () {
 		test('Failed Test Description', function () {
 			return false;
 		});
+
+		test('Other Test Description', function () {
+			return 'any';
+		});
 	});
 });
 
@@ -30,10 +38,20 @@ testGroup('Group Description B', function () {
 	console.log('Code execution...');
 
 	return test('Pass Test Description', function () {
-		return Promise.resolve(true);
+		return new Promise((resolve) => {
+			resolve(true);
+		});
 	}).then(() => {
 		return test('Failed Test Description', function () {
-			return Promise.resolve(false);
+			return new Promise((resolve) => {
+				resolve(false);
+			});
+		});
+	}).then(() => {
+		return test('Other Test Description', function () {
+			return new Promise((resolve) => {
+				resolve('any');
+			});
 		});
 	}).then(() => {
 		return testGroup('Sub Group Description', function () {
@@ -41,16 +59,18 @@ testGroup('Group Description B', function () {
 
 			return test('Pass Test Description', function () {
 				return new Promise((resolve) => {
-					setTimeout(function() {
-						resolve(true);
-					}, 500);
+					setTimeout(function () { resolve(true); }, 500);
 				});
 			}).then(() => {
 				return test('Failed Test Description', function () {
 					return new Promise((resolve) => {
-						setTimeout(function() {
-							resolve(false);
-						}, 500);
+						setTimeout(function () { resolve(false); }, 500);
+					});
+				});
+			}).then(() => {
+				return test('Other Test Description', function () {
+					return new Promise((resolve) => {
+						setTimeout(function () { resolve('any'); }, 500);
 					});
 				});
 			});

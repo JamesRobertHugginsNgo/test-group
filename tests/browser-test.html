@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<script src="dist/test-group.js"></script>
+	<script src="../dist/test-group.js"></script>
 	<script>
 		const { testGroup, test } = TestGroup;
 
@@ -23,6 +23,10 @@
 				return false;
 			});
 
+			test('Other Test Description', function () {
+				return 'any';
+			});
+
 			testGroup('Sub Group Description', function () {
 				console.log('Code execution...');
 
@@ -33,6 +37,10 @@
 				test('Failed Test Description', function () {
 					return false;
 				});
+
+				test('Other Test Description', function () {
+					return 'any';
+				});
 			});
 		});
 
@@ -40,10 +48,20 @@
 			console.log('Code execution...');
 
 			return test('Pass Test Description', function () {
-				return Promise.resolve(true);
+				return new Promise((resolve) => {
+					resolve(true);
+				});
 			}).then(() => {
 				return test('Failed Test Description', function () {
-					return Promise.resolve(false);
+					return new Promise((resolve) => {
+						resolve(false);
+					});
+				});
+			}).then(() => {
+				return test('Other Test Description', function () {
+					return new Promise((resolve) => {
+						resolve('any');
+					});
 				});
 			}).then(() => {
 				return testGroup('Sub Group Description', function () {
@@ -51,16 +69,18 @@
 
 					return test('Pass Test Description', function () {
 						return new Promise((resolve) => {
-							setTimeout(function () {
-								resolve(true);
-							}, 500);
+							setTimeout(function () { resolve(true); }, 500);
 						});
 					}).then(() => {
 						return test('Failed Test Description', function () {
 							return new Promise((resolve) => {
-								setTimeout(function () {
-									resolve(false);
-								}, 500);
+								setTimeout(function () { resolve(false); }, 500);
+							});
+						});
+					}).then(() => {
+						return test('Other Test Description', function () {
+							return new Promise((resolve) => {
+								setTimeout(function () { resolve('any'); }, 500);
 							});
 						});
 					});
