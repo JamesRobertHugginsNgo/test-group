@@ -1,6 +1,6 @@
 # test-group
 
-A set of functions for organizing test codes.
+JavaScript module for organizing test code.
 
 ## Installation
 
