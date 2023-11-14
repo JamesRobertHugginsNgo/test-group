@@ -5,6 +5,9 @@ export default {
 	output: {
 		path: Path.resolve('dist'),
 		filename: 'test-group.js',
-		library: 'TestGroup'
+		library: {
+			name: 'TestGroup',
+			type: 'umd'
+		}
 	}
 };

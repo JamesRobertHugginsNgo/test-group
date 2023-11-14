@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "webpack --config webpack.config.js --mode production",
-    "test": "node test-group.test.js"
+    "test": "node tests/nodejs-test.js"
   },
   "keywords": [],
   "author": "",

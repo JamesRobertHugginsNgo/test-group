@@ -1,71 +1,97 @@
 # test-group
 
-A set of functions for organizing test codes.
+JavaScript module for organizing test code.
 
-## Installation
+## NPM Installation
 
 ```
 npm install git+https://github.com/JamesRobertHugginsNgo/test-group.git#1.2.0
 ```
 
-## Usage
+## Function: testGroup(description, func)
+
+Argument | Type | Description
+-- | -- | --
+`description` | `string` | Group description.
+`func` | `function` | Group code. Return a `Promise` to have `testGroup` return a `Promise`.
+
+Return type: `undefined` or `Promise`.
+
+Returns `Promise` when the `func` argument returns a `Promise`
 
 ``` JavaScript
-import { testGroup, test } from './test-group.js';
+import { testGroup } from 'test-group';
 
+// Simple
 testGroup('Group Description A', function () {
   console.log('Code execution...');
-
-  test('Pass Test Description', function () {
-    return true;
-  });
-
-  test('Failed Test Description', function () {
-    return false;
-  });
-
-  testGroup('Sub Group Description', function () {
-    console.log('Code execution...');
-
-    test('Pass Test Description', function () {
-      return true;
-    });
-
-    test('Failed Test Description', function () {
-      return false;
-    });
-  });
 });
 
+// With Promise
 testGroup('Group Description B', function () {
-  console.log('Code execution...');
+  return new Promise(function (resolve) {
+    console.log('Code execution...');
+    resolve();
+  });
+}).then(function () {
+  console.log('Code execution completed');
+});
+```
 
-  return test('Pass Test Description', function () {
-    return Promise.resolve(true);
-  }).then(() => {
-    return test('Failed Test Description', function () {
-      return Promise.resolve(false);
-    });
-  }).then(() => {
-    return testGroup('Sub Group Description', function () {
-      console.log('Code execution...');
+## Function: test(description, func)
 
-      return test('Pass Test Description', function () {
-        return new Promise((resolve) => {
-          setTimeout(function() {
-            resolve(true);
-          }, 500);
-        });
-      }).then(() => {
-        return test('Failed Test Description', function () {
-          return new Promise((resolve) => {
-            setTimeout(function() {
-              resolve(false);
-            }, 500);
-          });
-        });
-      });
+Argument | Type | Description
+-- | -- | --
+`description` | `string` | Test description.
+`func` | `function` | Test code. Return `true` for pass, `false` for fail, and any other value for unknown. Return a `Promise` to have `test` return a `Promise`.
+
+Return type: `undefined` or `Promise`.
+
+Returns `Promise` when the `func` argument returns a `Promise`.
+
+``` JavaScript
+import { test } from 'test-group';
+
+// Simple
+test('Pass Test Description A', function () {
+  return true;
+});
+test('Failed Test Description A', function () {
+  return false;
+});
+test('Other Test Description A', function () {
+  return 'any';
+});
+
+// With Promise
+test('Pass Test Description B', function () {
+  return new Promise((resolve) => {
+    resolve(true);
+  });
+}).then(function () {
+  return test('Failed Test Description B', function () {
+    return new Promise((resolve) => {
+      resolve(false);
     });
   });
+}).then(function () {
+  return test('Other Test Description B', function () {
+    return new Promise((resolve) => {
+      resolve('any');
+    });
+  });
+}).then(function () {
+  console.log('Tests completed');
 });
+```
+
+## Using Script Tag
+
+The JavaScript library (found in the "dist" folder) can be used directly using an HTML script tag. The JavaScript module is exposed as a global `TestGroup` namespace.
+
+``` HTML
+<script src="node_modules/test-group/dist/test-group.js"></script>
+<script>
+  const { testGroup, test } = TestGroup;
+</script>
 ```
