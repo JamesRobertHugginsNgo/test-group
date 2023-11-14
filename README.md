@@ -15,7 +15,9 @@ Argument | Type | Description
 `description` | `string` | Group description.
 `func` | `function` | Group code. Return a `Promise` to have `testGroup` return a `Promise`.
 
-Returns `undefined` or `Promise`. Returns `Promise` when the `func` argument returns a `Promise`
+Return type: `undefined` or `Promise`.
+
+Returns `Promise` when the `func` argument returns a `Promise`
 
 ``` JavaScript
 import { testGroup } from 'test-group';
@@ -43,7 +45,9 @@ Argument | Type | Description
 `description` | `string` | Test description.
 `func` | `function` | Test code. Return `true` for pass, `false` for fail, and any other value for unknown. Return a `Promise` to have `test` return a `Promise`.
 
-Returns `undefined` or `Promise`. Returns `Promise` when the `func` argument returns a `Promise`.
+Return type: `undefined` or `Promise`.
+
+Returns `Promise` when the `func` argument returns a `Promise`.
 
 ``` JavaScript
 import { test } from 'test-group';
