@@ -1,12 +1,12 @@
 {
   "name": "test-group",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "",
   "main": "./test-group.js",
   "type": "module",
   "scripts": {
     "build": "webpack --config webpack.config.js --mode production",
-    "test": "node test-group.test.js"
+    "test": "node tests/nodejs-test.js"
   },
   "keywords": [],
   "author": "",
