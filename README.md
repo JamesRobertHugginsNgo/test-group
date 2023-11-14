@@ -5,7 +5,7 @@ JavaScript module for organizing test code.
 ## NPM Installation
 
 ```
-npm install git+https://github.com/JamesRobertHugginsNgo/test-group.git#1.2.0
+npm install git+https://github.com/JamesRobertHugginsNgo/test-group.git#1.3.0
 ```
 
 ## Function: testGroup(description, func)
